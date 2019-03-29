@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AgendaContato.Models.Contato>
+
+@{
+    ViewBag.Title = "Lista";
+}
+
+<h2>Lista de Contatos</h2>
+
+<p>
+    @Html.ActionLink("Novo Contato", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </th>
+        <th>
+            Telefone
+        </th>
+        <th>
+            E-mail
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sobrenome)
+        </td>
+        <td>
+          (@Html.DisplayFor(model => item.Telefones.FirstOrDefault().Ddd)) - @Html.DisplayFor(model => item.Telefones.FirstOrDefault().Numero)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Emails.FirstOrDefault().EnderecoEmail)
+        </td>
+
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Excluir", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
